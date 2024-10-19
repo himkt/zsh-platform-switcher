@@ -14,11 +14,12 @@ function change-platform () {
     return
   fi
 
-  # for python virtualenv
-  if type deactivate > /dev/null 2>&1; then
-    echo "Automatically deactivate virtualenv"
-    deactivate
-  fi
+  local critical_vars=("PATH" "PLATFORM_HIST" "PATH_HIST" "HOME" "USER" "SHELL" "TERM")
+  for var in $(env | cut -d= -f1); do
+    if [[ ! " ${critical_vars[@]} " =~ " $var " ]]; then
+      unset $var
+    fi
+  done
 
   case "${next_platform}" in
     arm64*)
