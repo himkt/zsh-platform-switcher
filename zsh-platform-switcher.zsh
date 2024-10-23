@@ -102,5 +102,20 @@ function switch-platform () {
   esac
 }
 
+# note(himkt); overwriting exit command since builtin exit does not work with zsh-platform-switcher
+# https://github.com/himkt/zsh-platform-switcher/issues/1
+function exit () {
+  if [ -f ".apple-silicon-platform" ]; then
+    echo "$(tput setaf 1)Warning$(tput sgr0): exit doesn't work when .apple-silicon-platform exists on the current directory."
+    return
+  fi
+  if [ -z "$(get-front-platform)" ]; then
+    echo "$(tput setaf 1)Warning$(tput sgr0): exit does not work when get-front-platform is empty."
+    echo "Please close a window directly."
+    return
+  fi
+  pop-front
+}
+
 typeset -a precmd_functions
 precmd_functions+=(switch-platform)
