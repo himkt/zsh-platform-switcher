@@ -107,11 +107,12 @@ function switch-platform () {
 function exit () {
   if [ -f ".apple-silicon-platform" ]; then
     echo "$(tput setaf 1)Warning$(tput sgr0): exit doesn't work when .apple-silicon-platform exists on the current directory."
+    echo "If you really want to close the window, please try to run $(tput setaf 1) builtin exit$(tput sgr0)"
     return
   fi
   if [ -z "$(get-front-platform)" ]; then
     echo "$(tput setaf 1)Warning$(tput sgr0): exit does not work when get-front-platform is empty."
-    echo "Please close a window directly."
+    echo "If you really want to close the window, please try to run $(tput setaf 1) builtin exit$(tput sgr0)"
     return
   fi
   pop-front
