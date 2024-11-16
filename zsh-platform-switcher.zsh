@@ -1,3 +1,7 @@
+if [[ "$OSTYPE" != darwin* ]]; then
+  exit
+fi
+
 function prepare-default-paths () {
   paths=()
   for path in `cat /etc/paths`; do
