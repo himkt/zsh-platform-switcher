@@ -1,5 +1,5 @@
 if [[ "$OSTYPE" != darwin* ]]; then
-  exit
+  return
 fi
 
 function prepare-default-paths () {
